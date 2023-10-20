@@ -58,11 +58,20 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Login Page',
+          'Flutter Demo Login',
           style: TextStyle(color: Color.fromARGB(255, 13, 68, 37)),
         ),
+        centerTitle: true,
+        elevation: 0, // to make it flush with the body
       ),
-      body: Padding(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.green.shade400, Colors.green.shade100],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Column(
@@ -71,20 +80,36 @@ class LoginPageState extends State<LoginPage> {
               if (isLoading)
                 const CircularProgressIndicator()
               else
-                const Icon(Icons.login,
-                    size: 80, color: Color.fromARGB(255, 53, 136, 74)),
-              const SizedBox(height: 20),
-              const Text(
-                "Login with Google",
-                style: TextStyle(fontSize: 24),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: ButtonStyle(iconSize: MaterialStateProperty.all(30)),
-                child: const Text(
-                  "Sign In",
+                const Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage(
+                          'assets/wgq1m1806tz51.jpg'), // your app logo
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      "Welcome to Flutter Apps!",
+                      style: TextStyle(
+                          fontSize: 24, color: Color.fromARGB(255, 9, 75, 5)),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "One stop solution for all your needs.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 16, color: Color.fromARGB(153, 5, 53, 35)),
+                    ),
+                    SizedBox(height: 50),
+                  ],
+                ),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.login,
+                    size: 20, color: Color.fromARGB(255, 12, 85, 51)),
+                label: const Text(
+                  " Login with Google",
                   style: TextStyle(
-                      fontSize: 16, color: Color.fromARGB(255, 46, 84, 16)),
+                      color: Color.fromARGB(255, 11, 74, 44), fontSize: 16),
                 ),
                 onPressed: () async {
                   User? user = await signInWithGoogle();
@@ -98,14 +123,15 @@ class LoginPageState extends State<LoginPage> {
                   }
                 },
               ),
+              const SizedBox(height: 70),
               if (errorMessage != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 16.0),
                   child: Text(
                     errorMessage!,
-                    style: const TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.redAccent),
                   ),
-                )
+                ),
             ],
           ),
         ),
