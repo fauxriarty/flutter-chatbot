@@ -40,6 +40,7 @@ dependencies:
   firebase_ui_auth: ^1.9.0
   cloud_firestore: ^4.11.0
   google_sign_in: ^5.0.4
+  sign_in_with_apple: ^5.0.0
   
 
 dev_dependencies:
