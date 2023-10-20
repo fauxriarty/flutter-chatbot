@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Login',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightGreen,
       ),
       home: const LoginPage(),
       routes: {
@@ -111,12 +111,19 @@ class HomePage extends StatelessWidget {
         titleTextStyle: const TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
+            letterSpacing: 1.2,
+            fontFamily: 'OpenSans',
             color: Color.fromARGB(255, 8, 8, 8)),
       ),
       body: const Center(
         child: Text(
           'Welcome! You are logged in.',
-          style: TextStyle(fontSize: 28),
+          style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+              fontFamily: 'OpenSans',
+              color: Color.fromARGB(255, 8, 8, 8)),
         ),
       ),
     );
