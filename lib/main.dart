@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
   final List<Map<String, dynamic>> _chatHistory = [];
   final TextEditingController _controller = TextEditingController();
   final apiKey = "AIzaSyAf55pcN5NXmEii0-Rm3Yhr_WJ_9EmCghU";
+  //todo regenerate apiKey and hide it, delete this one
 
   List<Map<String, String>> messages = [];
   // final url = Uri.parse(
