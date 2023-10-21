@@ -117,8 +117,7 @@ class LoginPageState extends State<LoginPage> {
                     // ignore: use_build_context_synchronously
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(user: user)),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   }
                 },
