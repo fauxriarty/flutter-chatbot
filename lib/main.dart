@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -28,7 +30,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
-  List<Map<String, dynamic>> _chatHistory = [];
+  final List<Map<String, dynamic>> _chatHistory = [];
   final TextEditingController _controller = TextEditingController();
   final apiKey = "AIzaSyAf55pcN5NXmEii0-Rm3Yhr_WJ_9EmCghU";
 
@@ -96,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Container(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         left: 14, right: 14, top: 10, bottom: 10),
                     child: Align(
                       alignment: (_chatHistory[index]["isSender"]
@@ -114,10 +116,10 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                           color: (_chatHistory[index]["isSender"]
-                              ? Color(0xFFF69170)
+                              ? const Color(0xFFF69170)
                               : Colors.white),
                         ),
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         child: Text(_chatHistory[index]["message"],
                             style: TextStyle(
                                 fontSize: 15,
