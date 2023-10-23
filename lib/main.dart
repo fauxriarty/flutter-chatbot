@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());
 
@@ -32,12 +33,23 @@ class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
   final List<Map<String, dynamic>> _chatHistory = [];
   final TextEditingController _controller = TextEditingController();
-  final apiKey = "AIzaSyAf55pcN5NXmEii0-Rm3Yhr_WJ_9EmCghU";
-  //todo regenerate apiKey and hide it, delete this one
+  late String apiKey;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadApiKey();
+  }
+
+  Future<void> _loadApiKey() async {
+    final secretJson = await rootBundle.loadString('assets/secrets.json');
+    final decodedJson = jsonDecode(secretJson);
+    setState(() {
+      apiKey = decodedJson['API_KEY'];
+    });
+  }
 
   List<Map<String, String>> messages = [];
-  // final url = Uri.parse(
-  //     "https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=$apiKey");
 
   @override
   void dispose() {
@@ -88,12 +100,12 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ListView.builder(
+        child: Column(
+          children: [
+            Expanded(
+              // <-- This will occupy all the space available
+              child: ListView.builder(
                 itemCount: _chatHistory.length,
-                shrinkWrap: true,
                 controller: _scrollController,
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
                 physics: const BouncingScrollPhysics(),
@@ -132,38 +144,38 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              Row(
-                children: [
-                  Expanded(
-                      child: TextField(
-                    controller: _controller,
-                  )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        if (_controller.text.isNotEmpty) {
-                          _chatHistory.add({
-                            "time": DateTime.now(),
-                            "message": _controller.text,
-                            "isSender": true,
-                          });
-                          _controller.clear();
-                        }
-                      });
-                      _scrollController.jumpTo(
-                        _scrollController.position.maxScrollExtent,
-                      );
-                      sentMessage();
-                    },
-                    icon: const Icon(Icons.send),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: TextField(
+                  controller: _controller,
+                )),
+                const SizedBox(
+                  width: 10,
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (_controller.text.isNotEmpty) {
+                        _chatHistory.add({
+                          "time": DateTime.now(),
+                          "message": _controller.text,
+                          "isSender": true,
+                        });
+                        _controller.clear();
+                      }
+                    });
+                    _scrollController.jumpTo(
+                      _scrollController.position.maxScrollExtent,
+                    );
+                    sentMessage();
+                  },
+                  icon: const Icon(Icons.send),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
