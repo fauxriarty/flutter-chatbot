@@ -11,4 +11,4 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
-secrets.json
+assets/secrets.json
